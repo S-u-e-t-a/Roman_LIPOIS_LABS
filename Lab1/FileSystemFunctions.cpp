@@ -38,7 +38,7 @@ bool FileSystemFunctions::isReadOnly(const std::string path)
 	FindFirstFileA(name, &findData);
 	if (findData.dwFileAttributes & FILE_ATTRIBUTE_READONLY)
 	{
-		//cerr << "РќРµРІРѕР·РјРѕР¶РЅРѕ СЃРѕС…СЂР°РЅРёС‚СЊ РґР°РЅРЅС‹Рµ РІ С„Р°Р№Р», РїСЂРµРґРЅР°Р·РЅР°С‡РµРЅРЅС‹Р№ С‚РѕР»СЊРєРѕ РґР»СЏ С‡С‚РµРЅРёСЏ." << endl;
+		//cerr << "Невозможно сохранить данные в файл, предназначенный только для чтения." << endl;
 		return true;
 	}
 	return false;
@@ -57,19 +57,19 @@ std::string FileSystemFunctions::getTextFromFile(const std::string path)
 	return string((std::istreambuf_iterator<char>(input_file)), std::istreambuf_iterator<char>());
 }
 
-void FileSystemFunctions::saveTextToFileDialog(const std::string text) //todo РїРµСЂРµРїРёСЃР°С‚СЊ РїСЂРё Р¶РµР»Р°РЅРёРё
+void FileSystemFunctions::saveTextToFileDialog(const std::string text) //todo переписать при желании
 {
 	string pathOutput;
-	cout << "Р’РІРµРґРёС‚Рµ РїСѓС‚СЊ Рє С„Р°Р№Р»Сѓ: ";
+	cout << "Введите путь к файлу: ";
 	//cin >> pathOutput;
 	getline(cin, pathOutput);
 	ifstream fout(pathOutput);
 	while (!isPathGood(pathOutput) || isReadOnly(pathOutput))
 	{
-		// РџСЂРѕРІРµСЂРєР° РЅР° РєРѕСЂСЂРµРєС‚РЅС‹Р№ РїСѓС‚СЊ Рё РёРјСЏ С„Р°Р№Р»Р°
+		// Проверка на корректный путь и имя файла
 		fout.close();
-		cerr << "РќРµРєРѕСЂСЂРµРєС‚РЅРѕРµ СѓРєР°Р·Р°РЅРёРµ РїСѓС‚Рё РёР»Рё РёРјРµРЅРё С„Р°Р№Р»Р°." << endl;
-		cout << "Р’РІРµРґРёС‚Рµ РїСѓС‚СЊ Рє С„Р°Р№Р»Сѓ: ";
+		cerr << "Некорректное указание пути или имени файла." << endl;
+		cout << "Введите путь к файлу: ";
 		//cin >> pathOutput;
 		getline(cin, pathOutput);
 		fout.open(pathOutput);
@@ -78,15 +78,15 @@ void FileSystemFunctions::saveTextToFileDialog(const std::string text) //todo Рї
 	fout.close();
 	while (fout)
 	{
-		// Р•СЃР»Рё С„Р°Р№Р» СѓР¶Рµ СЃСѓС‰РµСЃС‚РІСѓРµС‚
+		// Если файл уже существует
 		cout << endl;
-		cout << "Р”Р°РЅРЅС‹Р№ С„Р°Р№Р» СѓР¶Рµ СЃСѓС‰РµСЃС‚РІСѓРµС‚." << endl;
-		int choice = additionalMenu(); // Р’С‹РІРѕРґ РІСЃРїРѕРјРѕРіР°С‚РµР»СЊРЅРѕРіРѕ РјРµРЅСЋ
+		cout << "Данный файл уже существует." << endl;
+		int choice = additionalMenu(); // Вывод вспомогательного меню
 		switch (choice)
 		{
 		case Rewrite:
 			{
-				// Р’Р°СЂРёР°РЅС‚ СЃ РїРµСЂРµР·Р°РїРёСЃСЊСЋ
+				// Вариант с перезаписью
 				ofstream fout(pathOutput);
 				saveTextToFileFile(text, pathOutput);
 				fout.close();
@@ -94,7 +94,7 @@ void FileSystemFunctions::saveTextToFileDialog(const std::string text) //todo Рї
 			}
 		case CreateNewFile:
 			{
-				// Р’Р°СЂРёР°РЅС‚ СЃ СЃРѕР·РґР°РЅРёРµРј РЅРѕРІРѕРіРѕ С„Р°Р№Р»Р°
+				// Вариант с созданием нового файла
 				fout.close();
 				saveTextToFileDialog(text);
 				break;
@@ -104,7 +104,7 @@ void FileSystemFunctions::saveTextToFileDialog(const std::string text) //todo Рї
 	}
 	if (!fout)
 	{
-		// Р•СЃР»Рё С„Р°Р№Р»Р° РµС‰С‘ РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚ РїРѕ РґР°РЅРЅРѕРјСѓ РїСѓС‚Рё, С‚Рѕ РїСЂРѕРёСЃС…РѕРґРёС‚ СЃРѕР·РґР°РЅРёРµ С„Р°Р№Р»Р° Рё РµРіРѕ СЃРѕС…СЂР°РЅРµРЅРёРµ
+		// Если файла ещё не существует по данному пути, то происходит создание файла и его сохранение
 		saveTextToFileFile(text, pathOutput);
 		fout.close();
 	}
@@ -114,37 +114,37 @@ void FileSystemFunctions::saveTextToFileDialog(const std::string text) //todo Рї
 int FileSystemFunctions::additionalMenu()
 {
 	cout << endl;
-	cout << "\tР’С‹Р±РµСЂРёС‚Рµ РІР°СЂРёР°РЅС‚:" << endl;
-	cout << "1. РџРµСЂРµР·Р°РїРёСЃР°С‚СЊ С„Р°Р№Р»." << endl;
-	cout << "2. РЎРѕР·РґР°С‚СЊ РЅРѕРІС‹Р№ С„Р°Р№Р»." << endl;
-	int variant = InputTools::TryGetIntUntillSuccedInRange("Р’РІРµРґРёС‚Рµ С‡РёСЃР»Рѕ РѕС‚ 1 РґРѕ 2", Rewrite, CreateNewFile);
+	cout << "\tВыберите вариант:" << endl;
+	cout << "1. Перезаписать файл." << endl;
+	cout << "2. Создать новый файл." << endl;
+	int variant = InputTools::TryGetIntUntillSuccedInRange("Введите число от 1 до 2", Rewrite, CreateNewFile);
 	return variant;
 }
 
 std::string FileSystemFunctions::getTextFromFileDialog()
 {
-	// Р¤СѓРЅРєС†РёСЏ РґР»СЏ С‡С‚РµРЅРёСЏ РґР°РЅРЅС‹С… РёР· С„Р°Р№Р»Р°
+	// Функция для чтения данных из файла
 	string pathInput;
-	cout << "Р’РІРµРґРёС‚Рµ РїСѓС‚СЊ Рє С„Р°Р№Р»Сѓ: ";
+	cout << "Введите путь к файлу: ";
 	//cin >> pathInput;
 	getline(cin, pathInput);
 	ifstream fin(pathInput);
-	int count = 0; // РЎС‡РµС‚С‡РёРє РєРѕР»РёС‡РµСЃС‚РІР° РґР°РЅРЅС‹С… РІ РґР°РЅРЅРѕРј С„Р°Р№Р»Рµ
+	int count = 0; // Счетчик количества данных в данном файле
 	while (true)
 	{
 		while (!fin || !isPathGood(pathInput))
 		{
-			// РџСЂРѕРІРµСЂРєР° РЅР° СЃСѓС‰РµСЃС‚РІРѕРІР°РЅРёРµ С„Р°Р№Р»Р° РїРѕ СѓРєР°Р·Р°РЅРЅРѕРјСѓ РїСѓС‚Рё
+			// Проверка на существование файла по указанному пути
 			fin.close();
-			cerr << "РќРµРєРѕСЂСЂРµРєС‚РЅРѕРµ СѓРєР°Р·Р°РЅРёРµ РїСѓС‚Рё РёР»Рё РёРјРµРЅРё С„Р°Р№Р»Р°." << endl;
-			cout << "Р’РІРµРґРёС‚Рµ РїСѓС‚СЊ Рє С„Р°Р№Р»Сѓ: ";
+			cerr << "Некорректное указание пути или имени файла." << endl;
+			cout << "Введите путь к файлу: ";
 			getline(cin, pathInput);
-			fin.open(pathInput); // РћС‚РєСЂС‹С‚РёРµ С„Р°Р№Р»Р°
+			fin.open(pathInput); // Открытие файла
 		}
 		break;
 	}
 	fin.seekg(0, ios::beg);
-	//string temp; // РџРµСЂРµРјРµРЅРЅР°СЏ РґР»СЏ РІСЂРµРјРµРЅРЅРѕРіРѕ С…СЂР°РЅРµРЅРёСЏ СЃРёРјРІРѕР»РѕРІ РёР· С„Р°Р№Р»Р°
+	//string temp; // Переменная для временного хранения символов из файла
 	//while (!fin.eof())
 	//{
 	//	while (getline(fin, temp))

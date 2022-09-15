@@ -8,7 +8,7 @@
 using namespace std;
 InputFromKeyboard::InputFromKeyboard()
 {
-	text = "Р’РІРѕРґ РЅР°С‡Р°Р»СЊРЅС‹С… РґР°РЅРЅС‹С… СЃ РєР»Р°РІРёР°С‚СѓСЂС‹";
+	text = "Ввод начальных данных с клавиатуры";
 }
 
 
@@ -22,8 +22,8 @@ void InputFromKeyboard::chooseVariant()
 {
 	string text = "";
 	string buffer = "";
-	cout << "Р’РІРµРґРёС‚Рµ С‚РµРєСЃС‚." << endl;
-	cout << "РџРѕ РѕРєРѕРЅС‡Р°РЅРёРё РІРІРѕРґР° РІРІРµРґРёС‚Рµ РїСѓСЃС‚СѓСЋ СЃС‚СЂРѕРєСѓ." << endl;
+	cout << "Введите текст." << endl;
+	cout << "По окончании ввода введите пустую строку." << endl;
 	cout << endl;
 	while (true)
 	{
@@ -36,8 +36,8 @@ void InputFromKeyboard::chooseVariant()
 		{
 			if (text.size() == 0)
 			{
-				cout << "Р’С‹ РЅРµ РІРІРµР»Рё С‚РµРєСЃС‚." << endl;
-				cout << "Р’РІРµРґРёС‚Рµ С‚РµРєСЃС‚: " << endl;
+				cout << "Вы не ввели текст." << endl;
+				cout << "Введите текст: " << endl;
 				cout << endl;
 			}
 			else

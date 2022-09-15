@@ -8,10 +8,10 @@ using namespace std;
 
 MainMenu::MainMenu()
 {
-	text = "\tР“Р»Р°РІРЅРѕРµ РјРµРЅСЋ:\n"
-	"1. Р Р°Р±РѕС‚Р° СЃРѕ СЃС‚СЂРѕРєР°РјРё\n"
-	"2. Рћ РїСЂРѕРіСЂР°РјРјРµ\n"
-	"3. Р’С‹С…РѕРґ";
+	text = "\tГлавное меню:\n"
+	"1. Работа со строками\n"
+	"2. О программе\n"
+	"3. Выход";
 }
 
 void MainMenu::Show()
@@ -22,8 +22,8 @@ void MainMenu::Show()
 
 void MainMenu::chooseVariant()
 {
-	cout << "Р’С‹Р±РµСЂРµС‚Рµ РЅСѓР¶РЅС‹Р№ РІР°СЂРёР°РЅС‚:" << std::endl;
-	int variant = InputTools::TryGetIntUntillSuccedInRange("Р’РІРµРґРёС‚Рµ С‡РёСЃР»Рѕ РѕС‚ 1 РґРѕ 3", ShowWorkWithStringsMenu, Exit);
+	cout << "Выберете нужный вариант:" << std::endl;
+	int variant = InputTools::TryGetIntUntillSuccedInRange("Введите число от 1 до 3", ShowWorkWithStringsMenu, Exit);
 	switch (variant)
 	{
 	case ShowWorkWithStringsMenu:
@@ -35,7 +35,7 @@ void MainMenu::chooseVariant()
 	case Exit:
 		exit(0);
 	default:
-		cout << "Р§С‚Рѕ-С‚Рѕ РїРѕС€Р»Рѕ РЅРµ С‚Р°Рє....";
+		cout << "Что-то пошло не так....";
 		chooseVariant();
 		break;
 	}

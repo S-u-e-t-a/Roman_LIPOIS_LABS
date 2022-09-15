@@ -7,7 +7,7 @@ using namespace std;
 
 ChooseInputType::ChooseInputType()
 {
-	text = "Р Р°СЃРїРµС‡Р°С‚Р°С‚СЊ РІСЃРµ РїРµСЂРІС‹Рµ СЃР»РѕРІР° РїСЂРµРґР»РѕР¶РµРЅРёР№\nР’С‹Р±РѕСЂ С‚РёРїР° РІРІРѕРґР°\n1. РЎ РєР»Р°РІРёР°С‚СѓСЂС‹\n2. РР· С„Р°Р№Р»Р°";
+	text = "Распечатать все первые слова предложений\nВыбор типа ввода\n1. С клавиатуры\n2. Из файла";
 }
 
 
@@ -19,8 +19,8 @@ void ChooseInputType::Show()
 
 void ChooseInputType::chooseVariant()
 {
-	cout << "Р’С‹Р±РµСЂРµС‚Рµ РЅСѓР¶РЅС‹Р№ РІР°СЂРёР°РЅС‚:\n " << std::endl;
-	int variant = InputTools::TryGetIntUntillSuccedInRange("Р’РІРµРґРёС‚Рµ С‡РёСЃР»Рѕ РѕС‚ 1 РґРѕ 2", FromKeyboard, FromFile);
+	cout << "Выберете нужный вариант:\n " << std::endl;
+	int variant = InputTools::TryGetIntUntillSuccedInRange("Введите число от 1 до 2", FromKeyboard, FromFile);
 	switch (variant)
 	{
 	case FromKeyboard:
@@ -30,7 +30,7 @@ void ChooseInputType::chooseVariant()
 		ClearScreenAndPrintNew(std::make_shared<InputFromFile>());
 		break;
 	default:
-		cout << "Р§С‚Рѕ-С‚Рѕ РїРѕС€Р»Рѕ РЅРµ С‚Р°Рє....";
+		cout << "Что-то пошло не так....";
 		chooseVariant();
 		break;
 	}

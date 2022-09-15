@@ -6,7 +6,7 @@ using namespace std;
 
 WorkWithStrings::WorkWithStrings()
 {
-	text = "Р Р°Р±РѕС‚Р° СЃРѕ СЃС‚СЂРѕРєР°РјРё\n1. Р Р°СЃРїРµС‡Р°С‚Р°С‚СЊ РІСЃРµ РїРµСЂРІС‹Рµ СЃР»РѕРІР° РїСЂРµРґР»РѕР¶РµРЅРёР№.\n2. Р’РµСЂРЅСѓС‚СЊСЃСЏ РІ РіР»Р°РІРЅРѕРµ РјРµРЅСЋ";
+	text = "Работа со строками\n1. Распечатать все первые слова предложений.\n2. Вернуться в главное меню";
 }
 
 void WorkWithStrings::Show()
@@ -17,8 +17,8 @@ void WorkWithStrings::Show()
 
 void WorkWithStrings::chooseVariant()
 {
-	cout << "Р’С‹Р±РµСЂРµС‚Рµ РЅСѓР¶РЅС‹Р№ РІР°СЂРёР°РЅС‚:" << std::endl;
-	int variant = InputTools::TryGetIntUntillSuccedInRange("Р’РІРµРґРёС‚Рµ С‡РёСЃР»Рѕ РѕС‚ 1 РґРѕ 2", PrintAllFirstWordsOfSentence,
+	cout << "Выберете нужный вариант:" << std::endl;
+	int variant = InputTools::TryGetIntUntillSuccedInRange("Введите число от 1 до 2", PrintAllFirstWordsOfSentence,
 	                                                       BackToMenu);
 	switch (variant)
 	{
@@ -29,7 +29,7 @@ void WorkWithStrings::chooseVariant()
 		ClearScreenAndPrintNew(std::make_shared<MainMenu>());
 		break;
 	default:
-		cout << "Р§С‚Рѕ-С‚Рѕ РїРѕС€Р»Рѕ РЅРµ С‚Р°Рє....";
+		cout << "Что-то пошло не так....";
 		chooseVariant();
 		break;
 	}

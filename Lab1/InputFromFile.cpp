@@ -7,7 +7,7 @@ using namespace std;
 
 InputFromFile::InputFromFile()
 {
-	text = "Р’РІРѕРґ РЅР°С‡Р°Р»СЊРЅС‹С… РґР°РЅРЅС‹С… РёР· С„Р°Р№Р»Р°.";
+	text = "Ввод начальных данных из файла.";
 }
 
 void InputFromFile::Show()

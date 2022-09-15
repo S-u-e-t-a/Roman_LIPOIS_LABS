@@ -10,7 +10,7 @@ using namespace std;
 
 AnswerElement::AnswerElement(string initialIn, string answerIn)
 {
-	text = "Р’С…РѕРґРЅС‹Рµ РґР°РЅРЅС‹Рµ:\n" + initialIn + "\n\nР РµР·СѓР»СЊС‚Р°С‚:\n" + answerIn;
+	text = "Входные данные:\n" + initialIn + "\n\nРезультат:\n" + answerIn;
 	initial = initialIn;
 	answer = answerIn;
 }
@@ -24,39 +24,39 @@ void AnswerElement::Show()
 void AnswerElement::chooseVariant()
 {
 	cout <<
-		"\tР’С‹Р±РµСЂРµС‚Рµ РЅСѓР¶РЅС‹Р№ РІР°СЂРёР°РЅС‚:\n"
-	"1. РЎРѕС…СЂР°РЅРёС‚СЊ С‚РѕР»СЊРєРѕ РёСЃС…РѕРґРЅС‹Рµ РґР°РЅРЅС‹Рµ\n"
-	"2. РЎРѕС…СЂР°РЅРёС‚СЊ С‚РѕР»СЊРєРѕ СЂРµР·СѓР»СЊС‚Р°С‚\n"
-	"3. РЎРѕС…СЂР°РЅРёС‚СЊ РёСЃС…РѕРґРЅС‹Рµ РґР°РЅРЅС‹Рµ Рё СЂРµР·СѓР»СЊС‚Р°С‚ РІ РѕРґРёРЅ С„Р°Р№Р»\n"
-	"4. РЎРѕС…СЂР°РЅРёС‚СЊ РёСЃС…РѕРґРЅС‹Рµ РґР°РЅРЅС‹Рµ Рё СЂРµР·СѓР»СЊС‚Р°С‚ РІ СЂР°Р·РЅС‹Рµ С„Р°Р№Р»С‹\n"
-	"5. РќРёС‡РµРіРѕ РЅРµ СЃРѕС…СЂР°РЅСЏС‚СЊ."
+		"\tВыберете нужный вариант:\n"
+	"1. Сохранить только исходные данные\n"
+	"2. Сохранить только результат\n"
+	"3. Сохранить исходные данные и результат в один файл\n"
+	"4. Сохранить исходные данные и результат в разные файлы\n"
+	"5. Ничего не сохранять."
 		<< std::endl;
-	int variant = InputTools::TryGetIntUntillSuccedInRange("Р’РІРµРґРёС‚Рµ С‡РёСЃР»Рѕ РѕС‚ 1 РґРѕ 5",
+	int variant = InputTools::TryGetIntUntillSuccedInRange("Введите число от 1 до 5",
 	                                                       SaveOnlyInitial, SaveNothing);
 	switch (variant)
 	{
 	case SaveOnlyInitial:
-		cout << "\tРЎРѕС…СЂР°РЅРµРЅРёРµ РЅР°С‡Р°Р»СЊРЅС‹С… РґР°РЅРЅС‹С…";
+		cout << "\tСохранение начальных данных";
 		FileSystemFunctions::saveTextToFileDialog(initial);
 		break;
 	case SaveOnlyResult:
-		cout << "\tРЎРѕС…СЂР°РЅРµРЅРёРµ СЂРµР·СѓР»СЊС‚Р°С‚Р°";
+		cout << "\tСохранение результата";
 		FileSystemFunctions::saveTextToFileDialog(answer);
 		break;
 	case SaveInitialAndResultToOneFile:
-		cout << "\tРЎРѕС…СЂР°РЅРµРЅРёРµ РЅР°С‡Р°Р»СЊРЅС‹С… РґР°РЅРЅС‹С… Рё СЂРµР·СѓР»СЊС‚Р°С‚Р° РІ РѕРґРёРЅ С„Р°Р№Р»";
+		cout << "\tСохранение начальных данных и результата в один файл";
 		FileSystemFunctions::saveTextToFileDialog(text);
 		break;
 	case SaveInitialAndResultSeparately:
-		cout << "\tРЎРѕС…СЂР°РЅРµРЅРёРµ РЅР°С‡Р°Р»СЊРЅС‹С… РґР°РЅРЅС‹С…";
+		cout << "\tСохранение начальных данных";
 		FileSystemFunctions::saveTextToFileDialog(initial);
-		cout << "\tРЎРѕС…СЂР°РЅРµРЅРёРµ СЂРµР·СѓР»СЊС‚Р°С‚Р°";
+		cout << "\tСохранение результата";
 		FileSystemFunctions::saveTextToFileDialog(answer);
 		break;
 	case SaveNothing:
 		break;
 	default:
-		cout << "Р§С‚Рѕ-С‚Рѕ РїРѕС€Р»Рѕ РЅРµ С‚Р°Рє....";
+		cout << "Что-то пошло не так....";
 		chooseVariant();
 		break;
 	}
