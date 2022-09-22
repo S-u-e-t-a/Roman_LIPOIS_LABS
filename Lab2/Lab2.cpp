@@ -26,7 +26,9 @@ int main()
     C = C - &idenity;
     std::cout << "--------------------initial * invverced by second------------------" << std::endl;
     PrintMatrix(&C);
-
+    numInMatrix n{5,1};
+    n = n / 2;
+    std::cout << n.numerator << " " << n.denominator;
     std::cin >> s;
 }
 
