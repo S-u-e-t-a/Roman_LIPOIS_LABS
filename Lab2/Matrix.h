@@ -24,6 +24,7 @@ public:
     static Matrix GenerateIdentityMatrix(int size);
     //Matrix* Minor
     Matrix* get_minor(int i, int j);
+    Matrix* getInverted();
 private:
     unsigned rows_, cols_;
     std::vector<numInMatrix> data_;

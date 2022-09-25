@@ -1,5 +1,6 @@
 ﻿#include "Matrix.h"
 
+#include <iostream>
 
 
 Matrix::Matrix(unsigned rows, unsigned cols): rows_(rows), cols_(cols)
@@ -174,6 +175,69 @@ Matrix* Matrix::get_minor(int ii, int jj)
 		i++;
 	}
 	return minor;
+}
+
+Matrix* Matrix::getInverted()
+{
+	int order = getColCount();
+
+	// копируем начальную матрицу
+	auto augmentedMatrix = Matrix(order, order * 2);
+	for (int i = 0; i < order; i++) {
+		for (int j = 0; j < order; j++) {
+			augmentedMatrix(i, j) = operator()(i, j);
+		}
+	}
+	// заполняем правую часть расширенной матрицы единичной матрицей
+	for (int i = 0; i < order; i++) {
+		for (int j = order; j < 2 * order; j++) {
+			if (j == (i + order))
+			{
+				augmentedMatrix(i, j) = 1;
+			}
+			else
+			{
+				augmentedMatrix(i, j) = 0;
+			}
+		}
+	}
+	for (int nrow = 0; nrow < order; ++nrow)
+	{
+		auto divider = augmentedMatrix(nrow, nrow);
+		for (int i = 0; i < order * 2; ++i)
+		{
+			augmentedMatrix(nrow, i) = augmentedMatrix(nrow, i) / divider;
+		}
+
+		for (int lowerRow = nrow + 1; lowerRow < order; ++lowerRow)
+		{
+			auto factor = augmentedMatrix(lowerRow, nrow);
+			for (int i = 0; i < order * 2; ++i)
+			{
+				augmentedMatrix(lowerRow, i) = augmentedMatrix(lowerRow, i) - factor * augmentedMatrix(nrow, i);
+			}
+		}
+	}
+	for (int col = order - 1; col >= 1; --col)
+	{
+		for (int row = col - 1; row >= 0; --row)
+		{
+			auto factor = augmentedMatrix(row, col);
+			for (int i = 0; i < order * 2; ++i)
+			{
+				augmentedMatrix(row, i) = augmentedMatrix(row, i) - augmentedMatrix(col, i) * factor;
+			}
+		}
+	}
+	auto result = new Matrix(order, order);
+	for (int i = 0; i < order; ++i)
+	{
+		for (int j = 0; j < order; ++j)
+		{
+			result->operator()(i, j) = augmentedMatrix(i, order + j);
+		}
+	}
+	return result;
 }
 
 
