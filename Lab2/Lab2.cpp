@@ -7,14 +7,24 @@
 #include "test.h"
 int main()
 {
-    std::getchar();
-    Matrix m = MakeGilbertMatrix(11);
+    //std::getchar();
+    Matrix m = MakeGilbertMatrix(12);
+    /*Matrix m =  Matrix(3, 3);
+    m(0, 0) = 3;
+    m(0, 1) = 4;
+    m(0, 2) = 2;
+    m(1, 0) = 2;
+    m(1, 1) = -1;
+    m(1, 2) = -3;
+    m(2, 0) = 1;
+    m(2, 1) = 5;
+    m(2, 2) = 1;*/
     std::cout << "-----------------initialmatrix------------------" << std::endl;
     PrintMatrix(&m);
     //std::cout << "-----------------inverced by first-----------------------" << std::endl;
     //PrintMatrix(inverse(&m));
     //auto C =  m*inverse(&m);
-    auto idenity = Matrix::GenerateIdentityMatrix(11);
+    auto idenity = Matrix::GenerateIdentityMatrix(12);
     //C = C - &idenity;
     //std::cout << "-----------------initial * invverced by first-----------------------" << std::endl;
     //PrintMatrix(&C);

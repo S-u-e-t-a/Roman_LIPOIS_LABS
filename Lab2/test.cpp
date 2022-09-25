@@ -38,52 +38,37 @@ Matrix* InverseOMatrix(Matrix* matrix)
             }
         }
     }
-    //PrintMatrix(&augmentedMatrix);
-    // сортировка строк
-    for (int i = order - 1; i > 0; i--) {
-         if (augmentedMatrix(i - 1, 0) < augmentedMatrix(i,0))
-         {
-             for (int j = 0; j < 2 * order; j++) {
-                 temp = augmentedMatrix(i, j);
-                 augmentedMatrix(i, j) = augmentedMatrix(i - 1, j);
-                 augmentedMatrix(i - 1, j) = temp;
-             }
-         }
-    }
+	for (int nrow = 0; nrow < order; ++nrow)
+	{
+        auto divider = augmentedMatrix(nrow, nrow);
+        for (int i = 0; i < order*2; ++i)
+        {
+            augmentedMatrix(nrow, i) = augmentedMatrix(nrow, i) / divider;
+        }
 
-    PrintMatrix(&augmentedMatrix);
-
-    // Заменить строку на сумму самого себя и константа, кратная другой строке матрицы
-
-    for (int i = 0; i < order; i++) {
-        for (int j = 0; j < order; j++) {
-            if (j != i) {
-                numInMatrix ji = augmentedMatrix(j, i);
-                numInMatrix ii = augmentedMatrix(i, i);
-                //
-                temp = augmentedMatrix(j,i) / augmentedMatrix(i,i);
-                for (int k = 0; k < 2 * order; k++) 
-                {
-                    numInMatrix ik = augmentedMatrix(i, k);
-                    numInMatrix at = ik * temp;
-                    augmentedMatrix(j, k) = augmentedMatrix(j, k) - augmentedMatrix(i, k) * temp;
-                    //augmentedMatrix(j,k) -= augmentedMatrix(i,k) * temp;
-                }
+        for (int lowerRow = nrow+1; lowerRow < order; ++lowerRow)
+        {
+            auto factor = augmentedMatrix(lowerRow, nrow);
+            for (int i = 0; i < order*2; ++i)
+            {
+                augmentedMatrix(lowerRow, i) = augmentedMatrix(lowerRow, i)- factor * augmentedMatrix(nrow, i);
             }
         }
-        PrintMatrix(&augmentedMatrix);
-
-    }
+	}
     PrintMatrix(&augmentedMatrix);
-    // Умножаем каждую строку на ненулевое целое число.
-    // Делим элемент строки по диагональному элементу
+	for (int col = order - 1; col >= 1; --col)
+	{
+		for (int row = col - 1; row >= 0; --row)
+		{
+            std::cout << row << " " << col << std::endl;
+            auto factor = augmentedMatrix(row, col);
+            for (int i = 0; i < order*2; ++i)
+            {
+                augmentedMatrix(row, i) = augmentedMatrix(row, i)- augmentedMatrix(col, i) * factor;
+            }
+		}
+	}
 
-    for (int i = 0; i < order; i++) {
-        temp = augmentedMatrix(i,i);
-        for (int j = 0; j < 2 * order; j++) {
-            augmentedMatrix(i,j) = augmentedMatrix(i,j) / temp;
-        }
-    }
     PrintMatrix(&augmentedMatrix);
     auto result = new Matrix(order, order);
 	for (int i = 0; i < order; ++i)
@@ -93,7 +78,6 @@ Matrix* InverseOMatrix(Matrix* matrix)
             result->operator()(i,j) = augmentedMatrix(i, order + j);
 		}
 	}
-    PrintMatrix(result);
     return result;
 }
 

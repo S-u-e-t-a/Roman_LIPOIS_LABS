@@ -31,16 +31,16 @@ struct numInMatrix
 {
 public:
     numInMatrix();
-    numInMatrix(int value);
+    numInMatrix(long long value);
     //numInMatrix(double value);
     //numInMatrix(const numInMatrix& nim);
-    numInMatrix(int numer, int denom);
-    int numerator, denominator;
-    numInMatrix& operator = (int value);
-    numInMatrix operator + (int value);
-    numInMatrix operator - (int value);
-    numInMatrix operator * (int value);
-    numInMatrix operator / (int value);
+    numInMatrix(long long numer, long long denom);
+    long long numerator, denominator;
+    numInMatrix& operator = (long long value);
+    numInMatrix operator + (long long value);
+    numInMatrix operator - (long long value);
+    numInMatrix operator * (long long value);
+    numInMatrix operator / (long long value);
 
     numInMatrix operator + (numInMatrix value);
     numInMatrix operator - (numInMatrix value);
@@ -53,5 +53,5 @@ public:
     bool operator==(const numInMatrix& num_in_matrix) const;
 };
 
-int NOK(int n1, int n2);
-int NOD(int n1, int n2);
+long long NOK(long long n1, long long n2);
+long long NOD(long long n1, long long n2);

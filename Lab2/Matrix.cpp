@@ -40,12 +40,6 @@ Matrix::~Matrix()
 	data_.clear();
 }
 
-
-//Matrix& Matrix::operator=(const Matrix& m)
-//{
-//
-//}
-
 Matrix Matrix::operator*(const Matrix* m)
 {
 	if (this->getColCount() != m->getRowCount())
@@ -186,22 +180,13 @@ numInMatrix::numInMatrix()
 	denominator = 1;
 }
 
-numInMatrix::numInMatrix(int value)
+numInMatrix::numInMatrix(long long value)
 {
 	numerator = value;
 	denominator = 1;
 }
 
-//numInMatrix::numInMatrix(double value)
-//{
-//	throw std::invalid_argument("");
-//}
-
-//numInMatrix::numInMatrix(const numInMatrix& nim)
-//{
-//}
-
-numInMatrix::numInMatrix(int numer, int denom)
+numInMatrix::numInMatrix(long long numer, long long denom)
 {
 	if (denom==0)
 	{
@@ -226,30 +211,29 @@ numInMatrix Matrix::operator()(unsigned row, unsigned col) const
 	return data_[cols_ * row + col];
 }
 
-
-numInMatrix& numInMatrix::operator=(const int value)
+numInMatrix& numInMatrix::operator=(const long long value)
 {
 	numerator = value;
 	denominator = 1;
 	return *this;
 }
 
-numInMatrix numInMatrix::operator+(int value)
+numInMatrix numInMatrix::operator+(long long value)
 {
 	return {numerator + denominator * value, denominator};
 }
 
-numInMatrix numInMatrix::operator-(int value)
+numInMatrix numInMatrix::operator-(long long value)
 {
 	return {numerator - denominator * value, denominator};
 }
 
-numInMatrix numInMatrix::operator*(int value)
+numInMatrix numInMatrix::operator*(long long value)
 {
 	return {numerator * value, denominator};
 }
 
-numInMatrix numInMatrix::operator/(int value)
+numInMatrix numInMatrix::operator/(long long value)
 {
 	return {numerator, denominator * value};
 }
@@ -327,20 +311,7 @@ bool numInMatrix::operator==(const numInMatrix& num_in_matrix) const
 	return true;
 }
 
-//int NOD(int n1, int n2)
-//{
-//	if (n1 == n2)
-//    {
-//	    return n1;
-//    }
-//	
-//    int d = n1 - n2;
-//    if (d < 0) {
-//        d = -d;
-//    }
-//    return NOD(n2, d);
-//}
-int NOD(int a, int b)
+long long NOD(long long a, long long b)
 {
 	if (b == 0 || a == 0)
 	{
@@ -371,7 +342,16 @@ int NOD(int a, int b)
 }
 
 // Наименьшее общее кратное
-int NOK(int n1, int n2)
+long long NOK(long long n1, long long n2)
 {
-	return n1 * n2 / NOD(n1, n2);
+	auto nod = NOD(n1, n2);
+	if(n1>n2)
+	{
+		n1 = n1 / nod;
+	}
+	else
+	{
+		n2 = n2 / nod;
+	}
+	return n1 * n2;
 }
