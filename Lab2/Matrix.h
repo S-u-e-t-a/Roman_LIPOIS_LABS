@@ -2,7 +2,9 @@
 
 #include <stdexcept>
 #include <vector>
-struct numInMatrix;
+
+#include "numInMatriix.h"
+
 
 //https://isocpp.org/wiki/faq/operator-overloading#matrix-subscript-op
 class Matrix {
@@ -27,31 +29,3 @@ private:
     std::vector<numInMatrix> data_;
 };
 
-struct numInMatrix
-{
-public:
-    numInMatrix();
-    numInMatrix(long long value);
-    //numInMatrix(double value);
-    //numInMatrix(const numInMatrix& nim);
-    numInMatrix(long long numer, long long denom);
-    long long numerator, denominator;
-    numInMatrix& operator = (long long value);
-    numInMatrix operator + (long long value);
-    numInMatrix operator - (long long value);
-    numInMatrix operator * (long long value);
-    numInMatrix operator / (long long value);
-
-    numInMatrix operator + (numInMatrix value);
-    numInMatrix operator - (numInMatrix value);
-    numInMatrix operator*(const numInMatrix& value);
-    //numInMatrix operator * (numInMatrix value);
-    numInMatrix operator / (numInMatrix value);
-    double toDouble();
-    bool operator<(const numInMatrix& num_in_matrix) const;
-    bool operator!=(const numInMatrix& num_in_matrix) const;
-    bool operator==(const numInMatrix& num_in_matrix) const;
-};
-
-long long NOK(long long n1, long long n2);
-long long NOD(long long n1, long long n2);
