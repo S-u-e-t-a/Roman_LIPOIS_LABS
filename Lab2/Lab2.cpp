@@ -7,21 +7,23 @@
 //#include "test.h"
 int main()
 {
-    Matrix m = MakeGilbertMatrix(12);
+    auto order = 15;
+
+    Matrix<double> m = MakeGilbertMatrix<double>(order);
     std::cout << "----------------- initial matrix ------------------" << std::endl;
     PrintMatrix(&m);
-    auto idenity = Matrix::GenerateIdentityMatrix(12);
-    auto s = std::string();
+
     std::cout << "----------------- inversed -----------------------" << std::endl;
     auto inv = m.getInverted();
     PrintMatrix(inv);
-    auto C = m * inv;
-    C = C - &idenity;
+
     std::cout << "--------------------initial * inversed------------------" << std::endl;
+    auto C = m * inv;
+    auto idenity = Matrix<numInMatrix>::GenerateIdentityMatrix(order);
+    C = C - &idenity;
     PrintMatrix(&C);
-    numInMatrix n{5,1};
-    n = n / 2;
-    std::cout << n.numerator << " " << n.denominator;
+
+    auto s = std::string();
     std::cin >> s;
 }
 
