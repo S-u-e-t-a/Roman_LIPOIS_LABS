@@ -118,7 +118,7 @@ Matrix<MatrixType> Matrix<MatrixType>::operator-(const Matrix<rightMatrixType>* 
 	{
 		throw std::invalid_argument("Матрицы должны быть одинаковые по размеру!");
 	}
-	auto C = Matrix(this->getRowCount(), this->getColCount());
+	Matrix<MatrixType> C = Matrix(this->getRowCount(), this->getColCount());
 	for (int i = 0; i < this->getRowCount(); ++i)
 	{
 		for (int j = 0; j < this->getColCount(); ++j)

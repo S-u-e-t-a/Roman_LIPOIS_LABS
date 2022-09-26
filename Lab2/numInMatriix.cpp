@@ -86,14 +86,7 @@ numInMatrix numInMatrix::operator/(const numInMatrix& value) const
 	return { numerator * value.denominator, denominator * value.numerator };
 }
 
-double numInMatrix::toDouble() const
-{
-	if (numerator == 0)
-	{
-		return 0;
-	}
-	return (numerator * 1.0) / denominator;
-}
+
 
 bool numInMatrix::operator<(const numInMatrix& num_in_matrix) const
 {
@@ -101,6 +94,18 @@ bool numInMatrix::operator<(const numInMatrix& num_in_matrix) const
 	auto leftValue = nok / denominator * numerator;
 	auto rightValue = nok / num_in_matrix.denominator * num_in_matrix.numerator;
 	if (leftValue < rightValue)
+	{
+		return true;
+	}
+	return false;
+}
+
+bool numInMatrix::operator>(const numInMatrix& num_in_matrix) const
+{
+	auto nok = NOK(denominator, num_in_matrix.denominator);
+	auto leftValue = nok / denominator * numerator;
+	auto rightValue = nok / num_in_matrix.denominator * num_in_matrix.numerator;
+	if (leftValue > rightValue)
 	{
 		return true;
 	}
@@ -123,6 +128,15 @@ bool numInMatrix::operator==(const numInMatrix& num_in_matrix) const
 		return false;
 	}
 	return true;
+}
+
+numInMatrix::operator double() const
+{
+	if (numerator == 0)
+	{
+		return 0;
+	}
+	return (numerator * 1.0) / denominator;
 }
 
 long long NOD(long long a, long long b)

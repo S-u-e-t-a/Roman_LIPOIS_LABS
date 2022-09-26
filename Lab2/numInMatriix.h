@@ -18,10 +18,12 @@ public:
     numInMatrix operator - (const numInMatrix& value) const;
     numInMatrix operator*(const numInMatrix& value) const;
     numInMatrix operator / (const numInMatrix& value) const;
-    double toDouble() const;
+
     bool operator<(const numInMatrix& num_in_matrix) const;
+    bool operator>(const numInMatrix& num_in_matrix) const;
     bool operator!=(const numInMatrix& num_in_matrix) const;
     bool operator==(const numInMatrix& num_in_matrix) const;
+    explicit operator double() const;
 };
 
 long long NOK(long long n1, long long n2);
