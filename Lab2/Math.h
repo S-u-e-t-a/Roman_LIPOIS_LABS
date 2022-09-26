@@ -1,5 +1,7 @@
 #pragma once
 
+#include <mpirxx.h>
+
 #include "Matrix.h"
 template<typename MatrixType>
 Matrix<MatrixType> MakeGilbertMatrix(int order);
@@ -9,6 +11,8 @@ void PrintMatrix(Matrix<MatrixType>* m);
 int countOfSymsBeforeSeparator(double num);
 template<typename MatrixType>
 std::string getBeautifulViewOfMatrix(Matrix<MatrixType>* matrix, int precision);
+template<typename MatrixType>
+std::string getBeautifulViewOfMatrix(Matrix<mpz_class>* matrix, int precision);
 template<typename MatrixType>
 Matrix<MatrixType> makeLeftResidualMatrix(Matrix<MatrixType>* initial, Matrix<MatrixType>* inverted);
 template<typename MatrixType>
@@ -65,6 +69,22 @@ template<> Matrix<float> MakeGilbertMatrix(int order)
 		}
 	}
 	//PrintMatrix(&m);
+	return m;
+}
+
+template<> Matrix<mpq_class> MakeGilbertMatrix(int order)
+{
+	const mpq_class one = 1;
+	Matrix<mpq_class> m(order, order);
+	for (int i = 0; i < order; ++i)
+	{
+		for (int j = 0; j < order; ++j)
+		{
+			mpq_class del = (i + 1) + j + 1 - 1;
+			m(i, j) = one / del;
+		}
+	}
+	PrintMatrix(&m);
 	return m;
 }
 
@@ -147,7 +167,54 @@ std::string getBeautifulViewOfMatrix(Matrix<MatrixType>* matrix, int precision)
 	}
 	return ss.str();
 }
-
+template <>
+inline std::string getBeautifulViewOfMatrix(Matrix<mpq_class>* matrix, int precision)
+{
+	int cols = matrix->getColCount();
+	int rows = matrix->getRowCount();
+	auto maxLenOfNumInCol = std::vector<int>(cols);
+	for (int i = 0; i < cols; ++i)
+	{
+		int max = 0;
+		for (int j = 0; j < rows; ++j)
+		{
+			auto elem = matrix->operator()(j, i);
+			auto count = elem.get_str().size();
+			if (count > max)
+			{
+				max = count;
+			}
+		}
+		maxLenOfNumInCol[i] = max;
+	}
+	auto strMatrix = std::vector<std::vector<std::string>>(rows);
+	for (int i = 0; i < rows; ++i)
+	{
+		strMatrix[i] = std::vector<std::string>(cols);
+		for (int j = 0; j < cols; ++j)
+		{
+			auto elem = matrix->operator()(i, j);
+			//std::stringstream ss;
+			//ss << std::fixed << std::setprecision(precision) << static_cast<double>(matrix->operator()(i, j));
+			std::string strNum = elem.get_str();
+			while (strNum.size() < precision + maxLenOfNumInCol[j] + 1)
+			{
+				strNum = " " + strNum;
+			}
+			strMatrix[i][j] = strNum;
+		}
+	}
+	std::stringstream ss;
+	for (int i = 0; i < rows; ++i)
+	{
+		for (int j = 0; j < cols; ++j)
+		{
+			ss << strMatrix[i][j] << " ";
+		}
+		ss << "\n";
+	}
+	return ss.str();
+}
 void printTable(std::vector<std::vector<std::string>> normalizedTable)
 {
 	int rows = normalizedTable.size();
