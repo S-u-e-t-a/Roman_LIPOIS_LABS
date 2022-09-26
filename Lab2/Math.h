@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Matrix.h"
+#include "Rational.h"
 template<typename MatrixType>
 Matrix<MatrixType> MakeGilbertMatrix(int order);
 template<typename MatrixType>
@@ -62,6 +63,24 @@ template<> Matrix<float> MakeGilbertMatrix(int order)
 		{
 			//m(i, j) = { 1,i + 1 + j + 1 - 1 };
 			m(i, j) = 1 / (static_cast<float>(i + 1) + j + 1 - 1);
+		}
+	}
+	//PrintMatrix(&m);
+	return m;
+}
+
+template<> Matrix<CalcEngine::Rational> MakeGilbertMatrix(int order)
+{
+	Matrix<CalcEngine::Rational> m(order, order);
+	CalcEngine::Rational one = 1;
+	for (int i = 0; i < order; ++i)
+	{
+		for (int j = 0; j < order; ++j)
+		{
+			//m(i, j) = { 1,i + 1 + j + 1 - 1 };
+			CalcEngine::Rational del = i + 1 + j + 1 - 1;
+			CalcEngine::Rational elem = one / del;
+			m(i, j) = elem;
 		}
 	}
 	//PrintMatrix(&m);
@@ -147,7 +166,53 @@ std::string getBeautifulViewOfMatrix(Matrix<MatrixType>* matrix, int precision)
 	}
 	return ss.str();
 }
-
+template <>
+std::string getBeautifulViewOfMatrix(Matrix<CalcEngine::Rational>* matrix, int precision)
+{
+	int cols = matrix->getColCount();
+	int rows = matrix->getRowCount();
+	auto maxLenOfNumInCol = std::vector<int>(cols);
+	for (int i = 0; i < cols; ++i)
+	{
+		int max = 0;
+		for (int j = 0; j < rows; ++j)
+		{
+			auto elem = matrix->operator()(j, i);
+			auto ws = elem.ToString(10, NumberFormat::Float, precision);
+			auto count = ws.size();
+			if (count > max)
+			{
+				max = count;
+			}
+		}
+		maxLenOfNumInCol[i] = max;
+	}
+	auto strMatrix = std::vector<std::vector<std::string>>(rows);
+	for (int i = 0; i < rows; ++i)
+	{
+		strMatrix[i] = std::vector<std::string>(cols);
+		for (int j = 0; j < cols; ++j)
+		{
+			auto ws = matrix->operator()(j, i).ToString(10, NumberFormat::Float, precision);
+			std::string strNum = std::string(ws.begin(),ws.end());
+			while (strNum.size() < precision + maxLenOfNumInCol[j] + 1)
+			{
+				strNum = " " + strNum;
+			}
+			strMatrix[i][j] = strNum;
+		}
+	}
+	std::stringstream ss;
+	for (int i = 0; i < rows; ++i)
+	{
+		for (int j = 0; j < cols; ++j)
+		{
+			ss << strMatrix[i][j] << " ";
+		}
+		ss << "\n";
+	}
+	return ss.str();
+}
 void printTable(std::vector<std::vector<std::string>> normalizedTable)
 {
 	int rows = normalizedTable.size();

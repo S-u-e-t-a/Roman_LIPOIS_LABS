@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="MicrosoftRational">
+      <UniqueIdentifier>{f6eb35a8-0cd3-4bcf-8918-a51e0b977ce8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RatPack">
+      <UniqueIdentifier>{6a8bf840-9d0e-487d-90e7-9979e346c037}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Lab2.cpp">
@@ -27,6 +33,48 @@
     <ClCompile Include="numInMatriix.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Rational.cpp">
+      <Filter>MicrosoftRational</Filter>
+    </ClCompile>
+    <ClCompile Include="Number.cpp">
+      <Filter>MicrosoftRational</Filter>
+    </ClCompile>
+    <ClCompile Include="Ratpack\basex.cpp">
+      <Filter>RatPack</Filter>
+    </ClCompile>
+    <ClCompile Include="Ratpack\conv.cpp">
+      <Filter>RatPack</Filter>
+    </ClCompile>
+    <ClCompile Include="Ratpack\exp.cpp">
+      <Filter>RatPack</Filter>
+    </ClCompile>
+    <ClCompile Include="Ratpack\fact.cpp">
+      <Filter>RatPack</Filter>
+    </ClCompile>
+    <ClCompile Include="Ratpack\itrans.cpp">
+      <Filter>RatPack</Filter>
+    </ClCompile>
+    <ClCompile Include="Ratpack\itransh.cpp">
+      <Filter>RatPack</Filter>
+    </ClCompile>
+    <ClCompile Include="Ratpack\logic.cpp">
+      <Filter>RatPack</Filter>
+    </ClCompile>
+    <ClCompile Include="Ratpack\num.cpp">
+      <Filter>RatPack</Filter>
+    </ClCompile>
+    <ClCompile Include="Ratpack\rat.cpp">
+      <Filter>RatPack</Filter>
+    </ClCompile>
+    <ClCompile Include="Ratpack\support.cpp">
+      <Filter>RatPack</Filter>
+    </ClCompile>
+    <ClCompile Include="Ratpack\trans.cpp">
+      <Filter>RatPack</Filter>
+    </ClCompile>
+    <ClCompile Include="Ratpack\transh.cpp">
+      <Filter>RatPack</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Matrix.h">
@@ -37,6 +85,27 @@
     </ClInclude>
     <ClInclude Include="numInMatriix.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Rational.h">
+      <Filter>MicrosoftRational</Filter>
+    </ClInclude>
+    <ClInclude Include="Number.h">
+      <Filter>MicrosoftRational</Filter>
+    </ClInclude>
+    <ClInclude Include="Ratpack\CalcErr.h">
+      <Filter>RatPack</Filter>
+    </ClInclude>
+    <ClInclude Include="Ratpack\ratconst.h">
+      <Filter>RatPack</Filter>
+    </ClInclude>
+    <ClInclude Include="Ratpack\ratpak.h">
+      <Filter>RatPack</Filter>
+    </ClInclude>
+    <ClInclude Include="sal_cross_platform.h">
+      <Filter>RatPack</Filter>
+    </ClInclude>
+    <ClInclude Include="Ratpack\winerror_cross_platform.h">
+      <Filter>RatPack</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
