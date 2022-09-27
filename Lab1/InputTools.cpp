@@ -1,9 +1,11 @@
 #include "InputTools.h"
+
+#include <format>
 #include <iostream>
 
 using namespace std;
 
-int InputTools::TryGetIntUntillSucced(std::string inputMessage)
+int InputTools::TryGetIntUntilSuccess(std::string inputMessage)
 {
 	cout << inputMessage << std::endl;
 	string inputtedString;
@@ -11,21 +13,25 @@ int InputTools::TryGetIntUntillSucced(std::string inputMessage)
 	//cin >> inputtedString;
 	try
 	{
-		int i = stoi(inputtedString);
+		const int i = stoi(inputtedString);
 		return i;
 	}
 	catch (const std::exception&)
 	{
-		return TryGetIntUntillSucced(inputMessage);
+		return TryGetIntUntilSuccess(inputMessage);
 	}
 }
 
-int InputTools::TryGetIntUntillSuccedInRange(std::string inputMessage, int min, int max)
+int InputTools::TryGetIntUntilSuccessInRange(int min, int max, std::string inputMessage)
 {
-	int inputtedValue = TryGetIntUntillSucced(inputMessage);
+	if (inputMessage == "")
+	{
+		inputMessage = std::format("¬ведите число от {} до {}", min, max);
+	}
+	const int inputtedValue = TryGetIntUntilSuccess(inputMessage);
 	if (inputtedValue < min || inputtedValue > max)
 	{
-		return TryGetIntUntillSuccedInRange(inputMessage, min, max);
+		return TryGetIntUntilSuccessInRange(min, max, inputMessage);
 	}
 	return inputtedValue;
 }

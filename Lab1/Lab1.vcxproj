@@ -96,12 +96,13 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -140,31 +141,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AboutProgram.cpp" />
-    <ClCompile Include="ChooseInputType.cpp" />
     <ClCompile Include="FileSystemFunctions.cpp" />
-    <ClCompile Include="InputFromFile.cpp" />
-    <ClCompile Include="InputFromKeyboard.cpp" />
     <ClCompile Include="InputTools.cpp" />
-    <ClCompile Include="InterfaceElement.cpp" />
+    <ClCompile Include="interface.cpp" />
     <ClCompile Include="Lab1.cpp" />
-    <ClCompile Include="MainMenu.cpp" />
-    <ClCompile Include="ShowAnswerElement.cpp" />
     <ClCompile Include="StringWorker.cpp" />
-    <ClCompile Include="WorkWithStrings.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AboutProgram.h" />
-    <ClInclude Include="ChooseInputType.h" />
     <ClInclude Include="FileSystemFunctions.h" />
-    <ClInclude Include="InputFromFile.h" />
-    <ClInclude Include="InputFromKeyboard.h" />
     <ClInclude Include="InputTools.h" />
-    <ClInclude Include="InterfaceElement.h" />
-    <ClInclude Include="MainMenu.h" />
-    <ClInclude Include="ShowAnswerElement.h" />
+    <ClInclude Include="interface.h" />
     <ClInclude Include="StringWorker.h" />
-    <ClInclude Include="WorkWithStrings.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -4,15 +4,15 @@
 
 std::vector<std::string> StringWorker::GetFirstWordsOfSentences(std::string text)
 {
-	auto sentences = SplitString(text, ".?!");
-	auto firstWords = new std::vector<std::string>;
+	const auto sentences = SplitString(text, ".?!");
+	const auto firstWords = new std::vector<std::string>;
 	for (auto s : sentences)
 	{
 		auto splittedSentence = SplitString(s, " ,:;-_+=)(@#$^&*");
 		auto firstWord = splittedSentence[0];
-		if (firstWord=="")
+		if (firstWord == "")
 		{
-			if(splittedSentence.size()<=1)
+			if (splittedSentence.size() <= 1)
 			{
 				continue;
 			}
@@ -35,7 +35,7 @@ std::vector<std::string> StringWorker::SplitString(std::string stringToSplit, st
 std::string StringWorker::Join(std::vector<std::string> strings, std::string delimiter)
 {
 	auto newString = std::string("");
-	for (int i = 0; i < strings.size() - 1; i++)
+	for (size_t i = 0; i < strings.size() - 1; i++)
 	{
 		newString += strings[i] + delimiter;
 	}

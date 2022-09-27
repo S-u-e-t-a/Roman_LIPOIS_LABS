@@ -4,7 +4,7 @@
 class InputTools
 {
 public:
-	static int TryGetIntUntillSucced(std::string inputMessage);
-	static int TryGetIntUntillSuccedInRange(std::string inputMessage, int min, int max);
+	static int TryGetIntUntilSuccess(std::string inputMessage);
+	static int TryGetIntUntilSuccessInRange(int min, int max, std::string inputMessage = "");
 	//static void PrintError(std::string er);
 };

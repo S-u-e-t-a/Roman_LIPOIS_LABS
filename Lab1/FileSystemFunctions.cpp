@@ -1,24 +1,22 @@
 #include "FileSystemFunctions.h"
 #include <Windows.h>
 #include <iostream>
-#include <iomanip>
 #include <filesystem>
 #include <string>
-#include <vector>
 #include <string>
 #include <fstream>
 #include "InputTools.h"
 using namespace std;
 
-bool FileSystemFunctions::isPathGood(const std::string path)
+bool FileSystemFunctions::IsPathGood(const std::string path)
 {
-	const size_t found = path.find_last_of("\\");
-	const size_t point = path.find_last_of(".");
+	const size_t found = path.find_last_of('\\');
+	const size_t point = path.find_last_of('.');
 	const size_t base = point - found - 1;
-	const string basefilenameStr = path.substr(found + 1, base);
-	const char* basefilenameChar = basefilenameStr.c_str();
+	const string baseFilenameStr = path.substr(found + 1, base);
+	const char* baseFilenameChar = baseFilenameStr.c_str();
 	ofstream file(path, ios::app);
-	if (!_strcmpi(basefilenameChar, "con"))
+	if (!_strcmpi(baseFilenameChar, "con"))
 	{
 		return false;
 	}
@@ -30,7 +28,7 @@ bool FileSystemFunctions::isPathGood(const std::string path)
 	return true;
 }
 
-bool FileSystemFunctions::isReadOnly(const std::string path)
+bool FileSystemFunctions::IsReadOnly(const std::string path)
 {
 	ifstream file(path);
 	WIN32_FIND_DATAA findData;
@@ -44,27 +42,27 @@ bool FileSystemFunctions::isReadOnly(const std::string path)
 	return false;
 }
 
-void FileSystemFunctions::saveTextToFileFile(const std::string text, const std::string path)
+void FileSystemFunctions::SaveTextToFileFile(const std::string text, const std::string path)
 {
 	ofstream fout(path);
 	fout << text << endl;
 	fout.close();
 }
 
-std::string FileSystemFunctions::getTextFromFile(const std::string path)
+std::string FileSystemFunctions::GetTextFromFile(const std::string path)
 {
-	ifstream input_file(path);
-	return string((std::istreambuf_iterator<char>(input_file)), std::istreambuf_iterator<char>());
+	ifstream inputFile(path);
+	return std::string((std::istreambuf_iterator<char>(inputFile)), std::istreambuf_iterator<char>());
 }
 
-void FileSystemFunctions::saveTextToFileDialog(const std::string text) //todo переписать при желании
+void FileSystemFunctions::SaveTextToFileDialog(const std::string text) //todo переписать при желании
 {
 	string pathOutput;
 	cout << "Введите путь к файлу: ";
 	//cin >> pathOutput;
 	getline(cin, pathOutput);
 	ifstream fout(pathOutput);
-	while (!isPathGood(pathOutput) || isReadOnly(pathOutput))
+	while (!IsPathGood(pathOutput) || IsReadOnly(pathOutput))
 	{
 		// Проверка на корректный путь и имя файла
 		fout.close();
@@ -81,14 +79,14 @@ void FileSystemFunctions::saveTextToFileDialog(const std::string text) //todo пе
 		// Если файл уже существует
 		cout << endl;
 		cout << "Данный файл уже существует." << endl;
-		int choice = additionalMenu(); // Вывод вспомогательного меню
+		int choice = AdditionalMenu(); // Вывод вспомогательного меню
 		switch (choice)
 		{
 		case Rewrite:
 			{
 				// Вариант с перезаписью
 				ofstream fout(pathOutput);
-				saveTextToFileFile(text, pathOutput);
+				SaveTextToFileFile(text, pathOutput);
 				fout.close();
 				break;
 			}
@@ -96,7 +94,7 @@ void FileSystemFunctions::saveTextToFileDialog(const std::string text) //todo пе
 			{
 				// Вариант с созданием нового файла
 				fout.close();
-				saveTextToFileDialog(text);
+				SaveTextToFileDialog(text);
 				break;
 			}
 		}
@@ -105,23 +103,23 @@ void FileSystemFunctions::saveTextToFileDialog(const std::string text) //todo пе
 	if (!fout)
 	{
 		// Если файла ещё не существует по данному пути, то происходит создание файла и его сохранение
-		saveTextToFileFile(text, pathOutput);
+		SaveTextToFileFile(text, pathOutput);
 		fout.close();
 	}
 	cout << endl;
 }
 
-int FileSystemFunctions::additionalMenu()
+int FileSystemFunctions::AdditionalMenu()
 {
 	cout << endl;
 	cout << "\tВыберите вариант:" << endl;
 	cout << "1. Перезаписать файл." << endl;
 	cout << "2. Создать новый файл." << endl;
-	int variant = InputTools::TryGetIntUntillSuccedInRange("Введите число от 1 до 2", Rewrite, CreateNewFile);
+	const int variant = InputTools::TryGetIntUntilSuccessInRange(Rewrite, CreateNewFile); //"Введите число от 1 до 2",
 	return variant;
 }
 
-std::string FileSystemFunctions::getTextFromFileDialog()
+std::string FileSystemFunctions::GetTextFromFileDialog()
 {
 	// Функция для чтения данных из файла
 	string pathInput;
@@ -129,10 +127,9 @@ std::string FileSystemFunctions::getTextFromFileDialog()
 	//cin >> pathInput;
 	getline(cin, pathInput);
 	ifstream fin(pathInput);
-	int count = 0; // Счетчик количества данных в данном файле
 	while (true)
 	{
-		while (!fin || !isPathGood(pathInput))
+		while (!fin || !IsPathGood(pathInput))
 		{
 			// Проверка на существование файла по указанному пути
 			fin.close();
@@ -151,5 +148,5 @@ std::string FileSystemFunctions::getTextFromFileDialog()
 	//		text.push_back(temp);
 	//}
 	//fin.close();
-	return getTextFromFile(pathInput);
+	return GetTextFromFile(pathInput);
 }
