@@ -146,6 +146,7 @@
     <ClCompile Include="InputFromFile.cpp" />
     <ClCompile Include="InputFromKeyboard.cpp" />
     <ClCompile Include="InputTools.cpp" />
+    <ClCompile Include="interface.cpp" />
     <ClCompile Include="InterfaceElement.cpp" />
     <ClCompile Include="Lab1.cpp" />
     <ClCompile Include="MainMenu.cpp" />
@@ -160,6 +161,7 @@
     <ClInclude Include="InputFromFile.h" />
     <ClInclude Include="InputFromKeyboard.h" />
     <ClInclude Include="InputTools.h" />
+    <ClInclude Include="interface.h" />
     <ClInclude Include="InterfaceElement.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="ShowAnswerElement.h" />

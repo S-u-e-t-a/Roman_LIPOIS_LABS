@@ -69,8 +69,8 @@ int main()
     //auto left = makeLeftResidualMatrix(&m, inv);
     //auto right = makeRightResidualMatrix(&m, inv);
 
-    //PrintMatrix(&left);
-    //PrintMatrix(&right);
+    PrintMatrix(&left);
+    PrintMatrix(&right);
     //auto leftNorm = getRowNorm(&left);
     //auto rightNorm = getRowNorm(&right);
     //std::cout << "left norm = " <<leftNorm << std::endl;
