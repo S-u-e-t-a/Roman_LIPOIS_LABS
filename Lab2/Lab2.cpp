@@ -51,11 +51,19 @@ std::vector<std::vector<double>> analyze(int from, int to)
 
 int main()
 {
-    //auto order = 12;
-    //
-    //auto m = MakeGilbertMatrix<numInMatrix>(order);
-    //std::cout << "----------------- initial matrix ------------------" << std::endl;
-    //PrintMatrix(&m);
+    //mpz_class a, b, c;
+    //a = 1234;
+    //b = "-5678";
+    //c = a + b;
+    //std::cout << "sum is " << c << "\n";
+    //std::cout << "absolute value is " << abs(c) << "\n";
+
+
+    auto order = 15;
+    
+    auto m = MakeGilbertMatrix<mpq_class>(order);
+    std::cout << "----------------- initial matrix ------------------" << std::endl;
+    PrintMatrix(&m);
 
     //std::cout << "----------------- inversed -----------------------" << std::endl;
     //auto inv = m.getInverted();
