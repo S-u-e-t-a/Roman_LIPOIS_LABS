@@ -1,14 +1,36 @@
 #include <iostream>
+#include <windows.h>
+
 #include "Math.h"
 #include "Matrix.h"
 #include "table_printer.h"
 
+int TryGetIntUntilSuccess(std::string inputMessage)
+{
+	std::cout << inputMessage << std::endl;
+    std::string inputtedString;
+    getline(std::cin, inputtedString);
+    //cin >> inputtedString;
+    try
+    {
+        const int i = std::stoi(inputtedString);
+        return i;
+    }
+    catch (const std::exception&)
+    {
+        return TryGetIntUntilSuccess(inputMessage);
+    }
+}
 
 int main()
 {
+    setlocale(LC_ALL, "RU");
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
     const auto numsOftypes = 2;
-    auto order = 50;
+    auto order = TryGetIntUntilSuccess("Введите максимальный размер матрицы");
     bprinter::TablePrinter tp(&std::cout);
+
     std::vector<std::vector<double>> norms(4);
     for (int i = 0; i < 4; ++i)
     {
@@ -36,27 +58,9 @@ int main()
         norms[2][i] = (leftNorm);
         norms[3][i] = (rightNorm);
     }
-    auto maxLenOfNumInCol = std::vector<int>(order);
-    for (int i = 0; i < numsOftypes*2; ++i)
-    {
-        int max = 0;
-        for (int j = 0; j < order; ++j)
-        {
-            std::cout << i << " " << j << std::endl;
-            auto count = std::to_string(norms[i][j]).size();
-            //auto count = countOfSymsBeforeSeparator(norms[i][j]);
-            if (count > max)
-            {
-                max = count;
-            }
-        }
-        maxLenOfNumInCol[i] = max;
-    }
-    
 
-
-    std::vector<std::string> headers{"order", "double left", "double right", "float left", "float right"};
-    tp.AddColumn(headers[0], 5);
+    std::vector<std::string> headers{"Порядок", "double left", "double right", "float left", "float right"};
+    tp.AddColumn(headers[0], 7);
     for (int i = 1; i < headers.size(); ++i)
     {
         tp.AddColumn(headers[i], 20);

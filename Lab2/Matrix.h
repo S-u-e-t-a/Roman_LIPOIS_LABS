@@ -24,10 +24,8 @@ public:
     unsigned getRowCount() const;
     unsigned getColCount() const;
     static Matrix<int> GenerateIdentityMatrix(int size);
-    //Matrix* Minor
-    //Matrix* get_minor(int i, int j);
     Matrix<MatrixType>* getInverted();
-    //~Matrix<MatrixType>();        // Destructor
+
 private:
     unsigned rows_, cols_;
     std::vector<MatrixType> data_;
@@ -35,7 +33,6 @@ private:
 
 template <typename MatrixType>
 Matrix<MatrixType>::Matrix<MatrixType>(unsigned rows, unsigned cols) : rows_(rows), cols_(cols)
-//, data_ ← initialized below after the if...throw statement
 {
 	if (rows == 0 || cols == 0)
 		throw std::invalid_argument("Matrix constructor has 0 size");
@@ -71,12 +68,6 @@ Matrix<MatrixType>& Matrix<MatrixType>::operator=(const Matrix<MatrixType>& m)
 	return *this;
 }
 
-//template <typename MatrixType>
-//Matrix<MatrixType>::~Matrix<MatrixType>()
-//{
-//	data_.clear();
-//}
-
 template <typename MatrixType>
 template<typename rightMatrixType>
 Matrix<MatrixType> Matrix<MatrixType>::operator*(const Matrix<rightMatrixType>* m)
@@ -98,7 +89,6 @@ Matrix<MatrixType> Matrix<MatrixType>::operator*(const Matrix<rightMatrixType>* 
 			for (int k = 0; k < p; ++k)
 			{
 				cij = cij + A->operator()(i, k) * B->operator()(k, j);
-				//cij += A->operator()(i, k) * B->operator()(k, j);
 			}
 			C(i, j) = cij;
 		}
