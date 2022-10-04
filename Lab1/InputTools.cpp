@@ -5,6 +5,11 @@
 
 using namespace std;
 
+/// <summary>
+/// ѕытаетс€ получить от пользовател€ значение INT пока оно не будет верным
+/// </summary>
+/// <param name="inputMessage">—ообщение дл€ вывода</param>
+/// <returns>ѕолученное от пользовател€ число</returns>
 int InputTools::TryGetIntUntilSuccess(std::string inputMessage)
 {
 	cout << inputMessage << std::endl;
@@ -22,6 +27,13 @@ int InputTools::TryGetIntUntilSuccess(std::string inputMessage)
 	}
 }
 
+/// <summary>
+/// ѕытаетс€ получить от пользовател€ значение INT пока оно не будет верным в заданном интервале
+/// </summary>
+/// <param name="min">Ќачало интервала</param>
+/// <param name="max"> онец интервала</param>
+/// <param name="inputMessage">—ообщение дл€ вывода</param>
+/// <returns>ѕолученное от пользовател€ число</returns>
 int InputTools::TryGetIntUntilSuccessInRange(int min, int max, std::string inputMessage)
 {
 	if (inputMessage == "")

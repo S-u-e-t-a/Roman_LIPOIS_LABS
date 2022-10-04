@@ -8,6 +8,11 @@
 #include "InputTools.h"
 using namespace std;
 
+/// <summary>
+/// Проверяет, является ли путь к файлу допустимым
+/// </summary>
+/// <param name="path">Путь к файлу</param>
+/// <returns>Результат проверки</returns>
 bool FileSystemFunctions::IsPathGood(const std::string path)
 {
 	const size_t found = path.find_last_of('\\');
@@ -28,6 +33,11 @@ bool FileSystemFunctions::IsPathGood(const std::string path)
 	return true;
 }
 
+/// <summary>
+/// Проверяет, имеет ли файл атрибут "Только для чтения"
+/// </summary>
+/// <param name="path">Путь к файлу</param>
+/// <returns>Результат проверки</returns>
 bool FileSystemFunctions::IsReadOnly(const std::string path)
 {
 	ifstream file(path);
@@ -42,6 +52,11 @@ bool FileSystemFunctions::IsReadOnly(const std::string path)
 	return false;
 }
 
+/// <summary>
+/// Сохраняет текст в файл
+/// </summary>
+/// <param name="text">Текст для сохранения</param>
+/// <param name="path">Путь к файлу</param>
 void FileSystemFunctions::SaveTextToFileFile(const std::string text, const std::string path)
 {
 	ofstream fout(path);
@@ -49,12 +64,21 @@ void FileSystemFunctions::SaveTextToFileFile(const std::string text, const std::
 	fout.close();
 }
 
+/// <summary>
+/// Получает текст из файла
+/// </summary>
+/// <param name="path">Путь к файлу</param>
+/// <returns>Полученный из файла текст</returns>
 std::string FileSystemFunctions::GetTextFromFile(const std::string path)
 {
 	ifstream inputFile(path);
 	return std::string((std::istreambuf_iterator<char>(inputFile)), std::istreambuf_iterator<char>());
 }
 
+/// <summary>
+/// Запускает диалог с пользователем для сохранения данных в файл
+/// </summary>
+/// <param name="text">Текст для сохраннения</param>
 void FileSystemFunctions::SaveTextToFileDialog(const std::string text) //todo переписать при желании
 {
 	string pathOutput;
@@ -109,6 +133,10 @@ void FileSystemFunctions::SaveTextToFileDialog(const std::string text) //todo пе
 	cout << endl;
 }
 
+/// <summary>
+/// Выводит меню выбора в случае если файл уже существует
+/// </summary>
+/// <returns>Вариант выбранный пользователем</returns>
 int FileSystemFunctions::AdditionalMenu()
 {
 	cout << endl;
@@ -119,6 +147,10 @@ int FileSystemFunctions::AdditionalMenu()
 	return variant;
 }
 
+/// <summary>
+/// Выводит меню загрузки текста из файла
+/// </summary>
+/// <returns>Текст из файла</returns>
 std::string FileSystemFunctions::GetTextFromFileDialog()
 {
 	// Функция для чтения данных из файла

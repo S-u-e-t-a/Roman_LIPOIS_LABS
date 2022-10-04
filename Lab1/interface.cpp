@@ -5,12 +5,18 @@
 #include "FileSystemFunctions.h"
 #include "InputTools.h"
 #include "StringWorker.h"
-
+/// <summary>
+/// Выводит в консоль полученную строка
+/// </summary>
+/// <param name="text"> Строка для вывода</param>
 void WriteLine(std::string text = "")
 {
 	std::cout << text << std::endl;
 }
-
+/// <summary>
+/// Показывает главное меню программы
+/// </summary>
+/// <returns>Результат работы функции</returns>
 int MainMenu()
 {
 	const std::string text = "\t>>ГЛАВНОЕ МЕНЮ<<\n"
@@ -36,7 +42,10 @@ int MainMenu()
 	}
 	return Ok;
 }
-
+/// <summary>
+/// Вариант меню с получением первых слов предложений
+/// </summary>
+/// <returns></returns>
 int GetFirstWordsOfSentencesMenu()
 {
 	WriteLine("\t>>ПОЛУЧЕНИЕ ПЕРВЫХ СЛОВ ПРЕДЛОЖЕНИЙ<<");
@@ -68,6 +77,10 @@ int GetFirstWordsOfSentencesMenu()
 	return Ok;
 }
 
+/// <summary>
+/// Показывает справку
+/// </summary>
+/// <returns>Результат работы функции</returns>
 int ShowHelp()
 {
 	WriteLine("\t>>СПРАВКА<<");
@@ -97,9 +110,13 @@ int ShowHelp()
 	return Ok;
 }
 
+/// <summary>
+/// Показывает меню с выводом начальных данных с клавиатуры
+/// </summary>
+/// <returns>Полученный текст</returns>
 std::string InputFromKeyboard()
 {
-	WriteLine("\t>>ВВОД НАЧАЛЬНЫХ ДАННЫХ ИЗ ФАЙЛА<<");
+	WriteLine("\t>>ВВОД НАЧАЛЬНЫХ ДАННЫХ С КЛАВИАТУРЫ<<");
 	std::string text = "";
 	std::string buffer = "";
 	std::cout << "Введите текст." << std::endl;
@@ -129,13 +146,23 @@ std::string InputFromKeyboard()
 	return text;
 }
 
+/// <summary>
+/// Показывает меню с выводом начальных данных из файла
+/// </summary>
+/// <returns>Полученный текст</returns>
 std::string InputFromFile()
 {
-	WriteLine("\t>>ВВОД НАЧАЛЬНЫХ ДАННЫХ С КЛАВИАТУРЫ<<");
+	WriteLine("\t>>ВВОД НАЧАЛЬНЫХ ДАННЫХ ИЗ ФАЙЛА<<");
 	auto text = FileSystemFunctions::GetTextFromFileDialog();
 	return text;
 }
 
+/// <summary>
+/// Показывает меню с выбором сохранения файла
+/// </summary>
+/// <param name="message">Сообщение для вывода</param>
+/// <param name="stringToSave">Текст, который нужно сохранить</param>
+/// <returns>Результат выполнения функции</returns>
 int AskToSaveDialog(std::string message, std::string stringToSave)
 {
 	WriteLine(message);

@@ -2,6 +2,11 @@
 #include <list>
 #include <regex>
 
+/// <summary>
+/// Получает первые слова предложений из текста
+/// </summary>
+/// <param name="text">Текст с предложениями</param>
+/// <returns>Первые слова предложений</returns>
 std::vector<std::string> StringWorker::GetFirstWordsOfSentences(std::string text)
 {
 	const auto sentences = SplitString(text, ".?!");
@@ -23,6 +28,12 @@ std::vector<std::string> StringWorker::GetFirstWordsOfSentences(std::string text
 	return *firstWords;
 }
 
+/// <summary>
+/// Разбивает строку по заданным разделителям
+/// </summary>
+/// <param name="stringToSplit">Строка для разбиения</param>
+/// <param name="delemiters">Разделители</param>
+/// <returns>Разделенная строка</returns>
 std::vector<std::string> StringWorker::SplitString(std::string stringToSplit, std::string delemiters)
 {
 	//https://stackoverflow.com/a/58164098
@@ -32,6 +43,12 @@ std::vector<std::string> StringWorker::SplitString(std::string stringToSplit, st
 	return tokens;
 }
 
+/// <summary>
+/// Собирает строку с заданным разделителем
+/// </summary>
+/// <param name="strings">Строки для объединения</param>
+/// <param name="delimiter">Разделитель</param>
+/// <returns>Собранная строка</returns>
 std::string StringWorker::Join(std::vector<std::string> strings, std::string delimiter)
 {
 	auto newString = std::string("");
