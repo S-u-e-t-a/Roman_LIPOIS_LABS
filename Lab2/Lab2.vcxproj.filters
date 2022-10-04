@@ -27,6 +27,9 @@
     <ClCompile Include="numInMatriix.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="table_printer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Matrix.h">
@@ -35,7 +38,7 @@
     <ClInclude Include="Math.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="numInMatriix.h">
+    <ClInclude Include="table_printer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

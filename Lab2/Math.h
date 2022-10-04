@@ -1,5 +1,7 @@
 #pragma once
-
+#include <iomanip>
+#include <iostream>
+#include <sstream>
 #include "Matrix.h"
 template<typename MatrixType>
 Matrix<MatrixType> MakeGilbertMatrix(int order);
@@ -17,56 +19,35 @@ template<typename MatrixType>
 double getRowNorm(Matrix<MatrixType>* residualMatrix);
 #include "Math.h"
 
-#include <iomanip>
-#include <iostream>
-#include <sstream>
-#include "Matrix.h"
 
-
-template<> Matrix<numInMatrix> MakeGilbertMatrix(int order)
+template<typename MatrixType>
+Matrix<MatrixType> MakeGilbertMatrix(int order)
 {
-	Matrix<numInMatrix> m (order, order);
+	Matrix<MatrixType> m(order, order);
 	for (int i = 0; i < order; ++i)
 	{
 		for (int j = 0; j < order; ++j)
 		{
-			m(i, j) = { 1,i+1 + j+1 - 1 };
-			//m(i, j)= 1 / (static_cast<double>(i+1) + j+1 - 1);
+			m(i, j)= 1 / (static_cast<MatrixType>(i+1) + j+1 - 1);
 		}
 	}
 	//PrintMatrix(&m);
 	return m;
 }
 
-template<> Matrix<double> MakeGilbertMatrix(int order)
-{
-	Matrix<double> m(order, order);
-	for (int i = 0; i < order; ++i)
-	{
-		for (int j = 0; j < order; ++j)
-		{
-			//m(i, j) = { 1,i + 1 + j + 1 - 1 };
-			m(i, j)= 1 / (static_cast<double>(i+1) + j+1 - 1);
-		}
-	}
-	//PrintMatrix(&m);
-	return m;
-}
-
-template<> Matrix<float> MakeGilbertMatrix(int order)
-{
-	Matrix<float> m(order, order);
-	for (int i = 0; i < order; ++i)
-	{
-		for (int j = 0; j < order; ++j)
-		{
-			//m(i, j) = { 1,i + 1 + j + 1 - 1 };
-			m(i, j) = 1 / (static_cast<float>(i + 1) + j + 1 - 1);
-		}
-	}
-	//PrintMatrix(&m);
-	return m;
-}
+//template<> Matrix<float> MakeGilbertMatrix(int order)
+//{
+//	Matrix<float> m(order, order);
+//	for (int i = 0; i < order; ++i)
+//	{
+//		for (int j = 0; j < order; ++j)
+//		{
+//			m(i, j) = 1 / (static_cast<float>(i + 1) + j + 1 - 1);
+//		}
+//	}
+//	//PrintMatrix(&m);
+//	return m;
+//}
 
 template <typename MatrixType>
 void PrintMatrix(Matrix<MatrixType>* m)

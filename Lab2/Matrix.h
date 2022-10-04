@@ -3,11 +3,8 @@
 #include <stdexcept>
 #include <vector>
 
-#include "numInMatriix.h"
-
 //https://stackoverflow.com/questions/456713/why-do-i-get-unresolved-external-symbol-errors-when-using-templates
 //https://isocpp.org/wiki/faq/operator-overloading#matrix-subscript-op
-//Класс описывающий матрицу!!!!
 template<typename MatrixType>
 class Matrix {
 public:

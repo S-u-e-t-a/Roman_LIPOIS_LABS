@@ -144,11 +144,12 @@
     <ClCompile Include="Math.cpp" />
     <ClCompile Include="Matrix.cpp" />
     <ClCompile Include="numInMatriix.cpp" />
+    <ClCompile Include="table_printer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math.h" />
     <ClInclude Include="Matrix.h" />
-    <ClInclude Include="numInMatriix.h" />
+    <ClInclude Include="table_printer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
