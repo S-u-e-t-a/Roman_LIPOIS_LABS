@@ -1,4 +1,4 @@
-ï»¿#include "table_printer.h"
+#include "table_printer.h"
 #include <stdexcept>
 #include <iomanip>
 #include <stdexcept>
@@ -52,19 +52,73 @@ void TablePrinter::AddColumn(const std::string & header_name, int column_width){
   table_width_ += column_width + separator_.size(); // for the separator  
 }
 
+void TablePrinter::PrintHeaderTop()
+{
+    *out_stream_ << "Ú";
+    for (int i = 0; i < get_num_columns(); ++i)
+    {
+	    for (int j = 0; j < column_widths_[i]+1; ++j)
+	    {
+            if (j == column_widths_[i]) {
+                if(i==get_num_columns()-1)
+                {
+                    *out_stream_ << "¿";
+                }
+                else
+                {
+                    *out_stream_ << "Â";
+                }
+               
+            }
+            else
+            {
+                *out_stream_ << "Ä";
+            }
+	    }
+    }
+    *out_stream_ << "\n";
+}
+
+void TablePrinter::PrintHeaderBottom()
+{
+    *out_stream_ << "Ã";
+    for (int i = 0; i < get_num_columns(); ++i)
+    {
+        for (int j = 0; j < column_widths_[i] + 1; ++j)
+        {
+            if (j == column_widths_[i]) {
+                if (i == get_num_columns() - 1)
+                {
+                    *out_stream_ << "´";
+                }
+                else
+                {
+                    *out_stream_ << "Å";
+                }
+
+            }
+            else
+            {
+                *out_stream_ << "Ä";
+            }
+        }
+    }
+    *out_stream_ << "\n";
+}
+
 void TablePrinter::PrintHorizontalLine() {
-  *out_stream_ << "+"; // the left bar
+  *out_stream_ << "Ã"; // the left bar
 
   for (int i=0; i<table_width_-1; ++i)
-    *out_stream_ << "-";
+    *out_stream_ << "Ä";
 
-  *out_stream_ << "+"; // the right bar
+  *out_stream_ << "´"; // the right bar
   *out_stream_ << "\n";
 }
 
 void TablePrinter::PrintHeader(){
-  PrintHorizontalLine();
-  *out_stream_ << "|";
+  PrintHeaderTop();
+  *out_stream_ << "³";
 
   for (int i=0; i<get_num_columns(); ++i){
 
@@ -79,12 +133,34 @@ void TablePrinter::PrintHeader(){
     }
   }
 
-  *out_stream_ << "|\n";
-  PrintHorizontalLine();
+  *out_stream_ << "³\n";
+  PrintHeaderBottom();
 }
 
 void TablePrinter::PrintFooter(){
-  PrintHorizontalLine();
+    *out_stream_ << "À";
+    for (int i = 0; i < get_num_columns(); ++i)
+    {
+        for (int j = 0; j < column_widths_[i] + 1; ++j)
+        {
+            if (j == column_widths_[i]) {
+                if (i == get_num_columns() - 1)
+                {
+                    *out_stream_ << "Ù";
+                }
+                else
+                {
+                    *out_stream_ << "Á";
+                }
+
+            }
+            else
+            {
+                *out_stream_ << "Ä";
+            }
+        }
+    }
+    *out_stream_ << "\n";
 }
 
 TablePrinter& TablePrinter::operator<<(float input){

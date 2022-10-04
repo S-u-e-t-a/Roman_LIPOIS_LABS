@@ -31,7 +31,7 @@ class endl{};
   */
 class TablePrinter{
 public:
-  TablePrinter(std::ostream * output, const std::string & separator = "|");
+  TablePrinter(std::ostream * output, const std::string & separator = "³");
   ~TablePrinter();
 
   int get_num_columns() const;
@@ -57,7 +57,7 @@ public:
 
   template<typename T> TablePrinter& operator<<(T input){
     if (j_ == 0)
-      *out_stream_ << "|";
+      *out_stream_ << "³";
 
     if(flush_left_)
       *out_stream_ << std::left;
@@ -69,7 +69,7 @@ public:
                  << input;
 
     if (j_ == get_num_columns()-1){
-      *out_stream_ << "|\n";
+      *out_stream_ << "³\n";
       i_ = i_ + 1;
       j_ = 0;
     } else {
@@ -81,6 +81,8 @@ public:
   }
 
 private:
+    void PrintHeaderTop();
+    void PrintHeaderBottom();
   void PrintHorizontalLine();
 
   template<typename T> void OutputDecimalNumber(T input);

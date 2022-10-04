@@ -63,7 +63,7 @@ template<typename T> void TablePrinter::OutputDecimalNumber(T input){
   }
 
   if (j_ == get_num_columns()-1){
-    *out_stream_ << "|\n";
+    *out_stream_ << "³\n";
     i_ = i_ + 1;
     j_ = 0;
   } else {

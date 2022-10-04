@@ -24,11 +24,11 @@ int TryGetIntUntilSuccess(std::string inputMessage)
 
 int main()
 {
-    setlocale(LC_ALL, "RU");
-    SetConsoleCP(1251);
-    SetConsoleOutputCP(1251);
+    setlocale(LC_ALL, ".866");
+    SetConsoleCP(866);
+    SetConsoleOutputCP(866);
     const auto numsOftypes = 2;
-    auto order = TryGetIntUntilSuccess("¬ведите максимальный размер матрицы");
+    auto order = TryGetIntUntilSuccess("ВҐ•§®в• ђ†™б®ђ†Ђм≠л© а†Іђ•а ђ†ва®жл");
     bprinter::TablePrinter tp(&std::cout);
 
     std::vector<std::vector<double>> norms(4);
@@ -59,7 +59,7 @@ int main()
         norms[3][i] = (rightNorm);
     }
 
-    std::vector<std::string> headers{"ѕор€док", "double left", "double right", "float left", "float right"};
+    std::vector<std::string> headers{"ПЃап§Ѓ™", "double left", "double right", "float left", "float right"};
     tp.AddColumn(headers[0], 7);
     for (int i = 1; i < headers.size(); ++i)
     {
