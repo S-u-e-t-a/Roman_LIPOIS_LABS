@@ -9,6 +9,7 @@
 /// <returns></returns>
 int main()
 {
+	system("color F0");
 	setlocale(LC_ALL, "RU");
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);

@@ -24,6 +24,7 @@ int TryGetIntUntilSuccess(std::string inputMessage)
 
 int main()
 {
+    system("color F0");
     setlocale(LC_ALL, ".866");
     SetConsoleCP(866);
     SetConsoleOutputCP(866);

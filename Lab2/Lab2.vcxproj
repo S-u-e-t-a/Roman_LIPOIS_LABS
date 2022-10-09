@@ -141,9 +141,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Lab2.cpp" />
-    <ClCompile Include="Math.cpp" />
-    <ClCompile Include="Matrix.cpp" />
-    <ClCompile Include="numInMatriix.cpp" />
     <ClCompile Include="table_printer.cpp" />
   </ItemGroup>
   <ItemGroup>
